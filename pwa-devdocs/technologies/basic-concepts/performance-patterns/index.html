@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width initial-scale=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>Magento PWA Documentation</title>
+	<meta name="description" content="">
+
+	<link rel="stylesheet" href="/pwa-devdocs/assets/css/app.css" />
+	<link rel="stylesheet" href="/pwa-devdocs/assets/css/print.css" media="print"/>
+
+	<link rel="stylesheet" href="/pwa-devdocs/builds/css/main.css" />
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<script>
+    var baseUrl = "/pwa-devdocs";
+    var algolia = {
+        id : "null",
+        index:  "null",
+        key:  "null"
+    };
+</script>
+<!-- Hotjar Tracking Code for https://magento-research.github.io/pwa-devdocs/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:829386,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+	<link rel="canonical" href="/pwa-devdocs/technologies/basic-concepts/performance-patterns/">
+
+	<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="https://magento.com/favicon.ico">
+	<link rel="apple-touch-icon" type="image/png" href="https://magento.com/apple-touch-icon.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="57x57" href="https://magento.com/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="72x72" href="https://magento.com/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://magento.com/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="114x114" href="https://magento.com/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://magento.com/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="144x144" href="https://magento.com/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://magento.com/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://magento.com/apple-touch-icon-180x180.png">
+
+</head>
+<body class="layout-default"> 
+
+	<header class="site-header">
+
+		<nav class="site-nav">
+
+  <div class="menu-btn">
+    <a id="menu-btn" class="menu-trigger menu-icon" href="#nav-main" aria-haspopup="true" aria-controls="nav-main"></a>
+  </div>
+
+  <div class="nav-container">
+
+    <a class="logo" href="/pwa-devdocs/">
+      <img src="/pwa-devdocs/assets/i/m-logo.svg" alt="">
+      <img src="/pwa-devdocs/assets/i/magento-logo.svg" alt="Magento" class="magento-logo" />
+      <span class="site-logo"></span>
+    </a>
+
+    <div id="nav-main" class="nav-main-wrap" aria-labelledby="menu-btn">
+      <!-- Main Navigation -->
+<ul class="nav-main" role="menubar">
+
+    <li class="nav-main-item" tabindex="0" role="menuitem" aria-haspopup="true">
+        <span href="#" data-proofer-ignore tabindex="-1">Technologies</span>
+
+        <div class="nav-popup" role="menu" aria-hidden="true">
+
+            <ul>
+            
+                
+                <li><a href="/pwa-devdocs/technologies/overview/">Overview</a></li>
+            
+                
+                <li><a href="/pwa-devdocs/pwa-buildpack/">PWA Buildpack</a></li>
+            
+                
+                <li><a href="/pwa-devdocs/peregrine/">Peregrine</a></li>
+            
+                
+                <li><a href="/pwa-devdocs/venia-pwa-concept/">Venia Theme (Concept)</a></li>
+            
+            </ul>
+
+        </div>
+
+    </li>
+
+    <li class="nav-main-item" tabindex="0" role="menuitem" aria-haspopup="true">
+        <span href="#" data-proofer-ignore tabindex="-1">External DevDocs Sites</span>
+
+        <div class="nav-popup" role="menu" aria-hidden="true">
+
+            <ul>
+            
+                
+                <li><a href="http://devdocs.magento.com">Magento DevDocs</a></li>
+            
+                
+                <li><a href="https://magento.com/resources/technical">Tech Resources</a></li>
+            
+                
+                <li><a href="https://support.magento.com/hc/en-us">Knowledge Base</a></li>
+            
+            </ul>
+
+        </div>
+
+    </li>
+
+</ul>
+    </div>
+
+  </div>
+</nav><!-- .site-nav -->
+<div class="nav-main-fader"></div>
+
+    </header>
+    
+    <div class="message-banner">
+        This is the pre-release documentation site for the Magento PWA project. To provide feedback or contribute content, check out the <a href="https://github.com/magento-research/pwa-devdocs">pwa-devdocs</a> repository.
+    </div>
+
+
+	<div class="global-wrapper">
+
+		<div class="main-container">
+			<a id="main-content"></a>
+
+<div class="content-container">
+
+	<!-- sidebar -->
+<aside class="sidebar">
+    <a href="#" class="toc-toggler">Table of Contents</a>
+    <div class="sidebar-wrapper">
+
+      
+
+
+
+
+<h4 class="guide-title">Technologies</h4>
+
+<ul class="table-of-contents">
+
+    <li >
+        
+        <a href="/pwa-devdocs/technologies/overview/" >Overview</a>
+        
+
+        
+    </li>
+
+    <li >
+        
+        <a href="/pwa-devdocs/technologies/tools-libraries/" >Tools and libraries</a>
+        
+
+        
+    </li>
+
+    <li >
+        
+        <a href="/pwa-devdocs/technologies/basic-concepts/" >Basic concepts</a>
+        
+
+        
+    </li>
+
+</ul>
+
+
+
+<h4 class="guide-title">PWA Buildpack</h4>
+
+<ul class="table-of-contents">
+
+    <li >
+        
+        <a href="/pwa-devdocs/pwa-buildpack/" >Overview</a>
+        
+
+        
+    </li>
+
+    <li >
+        
+        <span>Tools reference</span>
+        
+
+        
+        <ul>
+        
+            <li >
+                
+                <a href="/pwa-devdocs/pwa-buildpack/reference/layout-loader/" >magento-layout-loader</a>
+                
+            </li>
+        
+            <li >
+                
+                <a href="/pwa-devdocs/pwa-buildpack/reference/root-components-plugin/" >MagentoRootComponentsPlugin</a>
+                
+            </li>
+        
+        </ul>
+        
+    </li>
+
+</ul>
+
+
+
+<h4 class="guide-title">Peregrine</h4>
+
+<ul class="table-of-contents">
+
+    <li >
+        
+        <a href="/pwa-devdocs/peregrine/" >Overview</a>
+        
+
+        
+    </li>
+
+    <li >
+        
+        <span>Component Reference</span>
+        
+
+        
+        <ul>
+        
+            <li >
+                
+                <a href="/pwa-devdocs/peregrine/reference/container-child/" >ContainerChild</a>
+                
+            </li>
+        
+            <li >
+                
+                <a href="/pwa-devdocs/peregrine/reference/router/" >Router</a>
+                
+            </li>
+        
+        </ul>
+        
+    </li>
+
+</ul>
+
+
+
+<h4 class="guide-title">Venia Theme (Concept)</h4>
+
+<ul class="table-of-contents">
+
+    <li >
+        
+        <a href="/pwa-devdocs/venia-pwa-concept/" >Overview</a>
+        
+
+        
+    </li>
+
+</ul>
+
+
+    </div>
+</aside>
+<!-- /sidebar -->
+
+
+	<section class="content">
+		<div class="content-wrap">
+			<!-- page-header -->
+<section class="page-intro">
+
+	<h1 class="page-heading"></h1>
+
+	<div class="actions-container">
+		<a class="gh-edit" href="https://github.com/magento-research/pwa-devdocs/tree/master/src/technologies/basic-concepts/performance-patterns/index.md">
+			<i class="material-icons edit">mode_edit</i> Improve this page
+		</a>
+		<a class="gh-report" href="https://github.com/magento-research/pwa-devdocs/issues/new">
+			<i class="material-icons">report</i> Report an issue
+		</a>
+	</div>
+</section>
+			<h2 id="sorry">Sorry!</h2>
+
+<p>The content for this page does not exist yet!</p>
+
+<p>To contribute to this page, see the following <a href="https://github.com/magento-research/pwa-devdocs/issues/16">GitHub Issue</a> for details.</p>
+
+<p><a href="/pwa-devdocs/">Return to main page</a></p>
+
+
+		</div>
+		<!-- /.content-wrap -->
+
+		<div class="page-info">
+
+  
+
+  
+
+</div>
+
+
+	</section>
+	<!-- /.content -->
+
+</div> <!-- /.content-container -->
+
+
+	</div>
+	<!-- /.main-container -->
+
+</div>
+<!-- /#gl-wrapper -->
+
+<!-- footer-->
+<div class="page-footer">
+  <div class="container">
+
+    <div class="copyright-links">
+      <ul class="nav footer-links">
+  <li><a href="http://magento.com/legal/terms/privacy/">Privacy Policy</a></li>
+  <li><a href="http://magento.com/legal/terms/">Terms of Service</a></li>
+  <li><a href="http://magento.com/legal/licensing/">License/Trademark FAQ</a></li>
+</ul>
+
+    </div>
+
+		<div class="copyright-date">&copy; 2018 Magento. All rights reserved.</div>
+
+  </div>
+</div>
+<!-- / #footer -->
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+<script src="/pwa-devdocs/assets/js/app.min.js"></script>
+
+
+
+
+
+
+
+</body>
+</html>
+
